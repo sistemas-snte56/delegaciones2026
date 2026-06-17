@@ -17,5 +17,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => bcrypt('password2026'),
         ]);
+
+        $this->command->info('Usuarios importados correctamente.');
     }
 }

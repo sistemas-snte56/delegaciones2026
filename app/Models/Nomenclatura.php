@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Delegacion;
 use App\Models\TipoDelegacion;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -32,4 +33,12 @@ class Nomenclatura extends Model
     {
         return $this->hasMany(Delegacion::class, 'nomenclatura_id');
     }
+
+    protected function nomenclatura(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value) => $value,
+            set: fn (?string $value) => $value ? mb_strtoupper($value, 'UTF-8') : null,
+        );
+    }      
 }

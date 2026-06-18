@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Regions;
 
-use App\Filament\Resources\Regions\Pages\CreateRegion;
-use App\Filament\Resources\Regions\Pages\EditRegion;
+// use App\Filament\Resources\Regions\Pages\CreateRegion;
+// use App\Filament\Resources\Regions\Pages\EditRegion;
 use App\Filament\Resources\Regions\Pages\ListRegions;
 use App\Filament\Resources\Regions\Schemas\RegionForm;
 use App\Filament\Resources\Regions\Tables\RegionsTable;

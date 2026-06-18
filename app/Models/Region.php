@@ -28,4 +28,20 @@ class Region extends Model
             get: fn () => "{$this->region} - {$this->sede}"
         );
     }
+
+    protected function region(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value) => $value,
+            set: fn (?string $value) => $value ? mb_strtoupper($value, 'UTF-8') : null,
+        );
+    }
+
+    protected function sede(): Attribute
+    {
+        return Attribute::make(
+            get: fn (?string $value) => $value,
+            set: fn (?string $value) => $value ? mb_strtoupper($value, 'UTF-8') : null,
+        );
+    }   
 }

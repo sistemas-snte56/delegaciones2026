@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreignId('user_id')
                   ->nullable()
                   ->constrained('users')
-                  ->nullOnDelete();
+                  ->nullOnDelete()
+                  ->cascadeOnUpdate();
             $table->enum('titulo', ['PROF.', 'PROFR.', 'C.'])->nullable();
             $table->string('nombre', 150);
             $table->string('apaterno', 150);

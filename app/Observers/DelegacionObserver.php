@@ -38,7 +38,8 @@ class DelegacionObserver
 
     private function generarClave(Delegacion $delegacion): string
     {
-        $nomenclatura = $delegacion->nomenclatura->nomenclatura;
+        // $nomenclatura = $delegacion->nomenclatura->nomenclatura; 
+        $nomenclatura = $delegacion->nomenclatura?->nomenclatura;
         $numero       = str_pad($delegacion->num_delegacional, 2, '0', STR_PAD_LEFT);
 
         return "{$nomenclatura}{$numero}";

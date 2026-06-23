@@ -34,11 +34,12 @@ class RegionsTable
                 //
             ])
             ->recordActions([
-                EditAction::make()
-                    ->slideOver()
-                    ->label('Editar')
-                    ->modalHeading('Editar Región')
-                    ->modalWidth('md'),
+                // EditAction::make()
+                //     ->slideOver()
+                //     ->label('Editar')
+                //     ->modalHeading('Editar Región')
+                //     ->modalWidth('md'),
+                EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

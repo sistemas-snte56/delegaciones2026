@@ -20,7 +20,13 @@ class RegionResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Region';
+    protected static ?string $recordTitleAttribute = 'region';
+
+    protected static ?string $modelLabel = 'Región';
+
+    protected static ?string $pluralModelLabel = 'Regiones';   
+    
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

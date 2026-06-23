@@ -57,28 +57,12 @@ class MaestroSeeder extends Seeder
                     'email'         => $maestro['email'] === 'empty@email.com' ? null : $maestro['email'],
                     'telefono'      => $telefono,
                     'direccion'     => $direccion,
-                    'cp'            => $maestro['cp'] === 'EMPTY' ? null : $maestro['cp'],
+                    'cp'            => $maestro['cp'] === 'EMPTY' ? null : (string) intval($maestro['cp']),
                     'ciudad'        => $ciudad,
                     'estado'        => $estado,
                 ]
             );
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // 6. Mensaje de éxito en la consola de Artisan
         $this->command->info('Maestros importados correctamente desde el JSON.');

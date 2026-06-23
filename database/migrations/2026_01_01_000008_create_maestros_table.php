@@ -21,7 +21,7 @@ return new class extends Migration
                   ->constrained('users')
                   ->nullOnDelete()
                   ->cascadeOnUpdate();
-            $table->enum('titulo', ['PROF.', 'PROFR.', 'C.'])->nullable();
+            $table->enum('titulo', ['PROF.', 'PROFA.', 'C.'])->nullable();
             $table->string('nombre', 150);
             $table->string('apaterno', 150);
             $table->string('amaterno', 150)->nullable();

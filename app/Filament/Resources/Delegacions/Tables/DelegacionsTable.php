@@ -45,15 +45,15 @@ class DelegacionsTable
                             "{$record->region} - {$record->sede}"
                         ),
             ])
-            ->recordUrl(null)
+            // ->recordUrl(null)
             ->recordActions([
-                ViewAction::make()->slideOver(),
+                ViewAction::make(),
+            ])
+                
+            ->actions([
                 EditAction::make(),
             ])
-
-            // ->actions(
-            //     [ViewAction::make()->slideOver(),]
-            // )
+            
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()->label('Eliminar Seleccionados')

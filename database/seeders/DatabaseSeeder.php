@@ -22,14 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            // RoleSeeder::class, 
-            // TipoDelegacionSeeder::class,
-            // RegionSeeder::class,
-            // NivelSeeder::class,
-            // NomenclaturaSeeder::class,
-            // SecretariaSeeder::class,
-            // UserSeeder::class,
-
 
             RoleSeeder::class, 
             TipoDelegacionSeeder::class,
@@ -44,6 +36,12 @@ class DatabaseSeeder extends Seeder
             
             // 3. Al final, las Secretarias, porque ya existen Niveles, Tipos de Delegación y Users/Maestros
             SecretariaSeeder::class,
+
+            DelegacionSeeder::class,
+
+            // 4. Terminamos realizando el Seeder de los Maestros
+            MaestroSeeder::class
+
 
         ]);
     }

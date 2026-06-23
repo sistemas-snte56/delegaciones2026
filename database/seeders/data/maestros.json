@@ -23560,22 +23560,5 @@
         "cp":94050.0,
         "ciudad":"TOTUTLA",
         "estado":"VERACRUZ"
-    },
-    {
-        "id":1445,
-        "delegacion_id":337,
-        "secretaria_id":15,
-        "user_id":null,
-        "titulo":"EMPTY",
-        "nombre":"EMPTY",
-        "apaterno":"EMPTY",
-        "amaterno":"EMPTY",
-        "genero":"MASCULINO",
-        "email":"15empty@email.com",
-        "telefono":"EMPTY",
-        "direccion":"EMPTY",
-        "cp":0.0,
-        "ciudad":"EMPTY",
-        "estado":"EMPTY"
     }
 ]

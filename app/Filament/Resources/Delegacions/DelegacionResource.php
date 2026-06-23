@@ -60,7 +60,7 @@ class DelegacionResource extends Resource
         return [
             'index' => ListDelegacions::route('/'),
             'create' => CreateDelegacion::route('/create'),
-            'view' => ViewDelegacion::route('/{record}'),
+            // 'view' => ViewDelegacion::route('/{record}'),
             'edit' => EditDelegacion::route('/{record}/edit'),
         ];
     }

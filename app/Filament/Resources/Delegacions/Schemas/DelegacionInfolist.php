@@ -19,26 +19,42 @@ class DelegacionInfolist
                 Section::make('INFORMACIÓN GENERAL')
                     ->columns(3)
                     ->description('REGIÓN Y PERIODO DE LA DELEGACIÓ O CENTRO DE TRABAJO')
-                    ->icon('heroicon-o-building-office-2')                    
+                    #->aside() // Esto pone el título a la izquierda y el contenido a la derecha
+                    ->icon('heroicon-o-building-office-2')  
+                    ->columnSpanFull()                  
                     ->components([
                         TextEntry::make('region.nombre_completo')
-                            ->label('REGIÓN')->weight('bold'),
+                            ->label('REGIÓN')
+                            ->weight('bold')
+                            ->badge()
+                            ->color('info')
+                            ->icon('heroicon-m-map-pin')
+                            ,
 
                         TextEntry::make('fecha_inicio_delegacional')
-                            ->label('FECHA DE INICIO DEL COMITÉ')
+                            ->label('INICIO DEL COMITÉ')
                             ->weight('bold')
-                            ->date(),
+                            ->badge()
+                            ->color('info')
+                            ->icon('heroicon-s-calendar')
+                            ->date()
+                            ->extraAttributes([
+                                    'class' => 'px-3 py-1 gap-2'
+                                ]),
                             
                             TextEntry::make('fecha_final_delegacional')
-                            ->label('FECHA FINAL DEL COMITÉ')
+                            ->label('FINAL DEL COMITÉ')
                             ->weight('bold')
+                            ->badge()
+                            ->color('info')
+                            ->icon('heroicon-s-calendar')
                             ->date(),
                     ]),
 
                 Section::make('DATOS PRINCIPALES')
                     ->description('DELEGACIÓN O CENTRO DE TRABAJO')
                     ->icon('heroicon-o-document-text')
-                    // ->columnSpanFull()
+                    ->columnSpanFull()
                     ->columns(1)     
                     ->schema([
                         Grid::make(3)
@@ -50,7 +66,9 @@ class DelegacionInfolist
                                     ->columnSpan(3), // 👈 ocupa las 3 columnas
 
                                 TextEntry::make('clave_delegacion')
-                                    ->label('Centro de trabajo'),
+                                    ->label('DELEGACIÓN')
+                                    ->copyable()
+                                    ->icon('heroicon-m-tag'),
 
                                 TextEntry::make('nivel.nombre')
                                     ->label('Nivel educativo'),
@@ -60,21 +78,27 @@ class DelegacionInfolist
                             ]),
                     ]),
 
-                Section::make('Ubicación')
-                    ->columns(4)
-                    ->components([
-                        TextEntry::make('direccion_delegacional')
-                            ->label('Dirección')
-                            ->columnSpan(2),
-
-                        TextEntry::make('cp_delegacional')
-                            ->label('Código postal'),
-
-                        TextEntry::make('ciudad_delegacional')
-                            ->label('Municipio'),
-
-                        TextEntry::make('estado_delegacional')
-                            ->label('Estado'),
+                Section::make('UBICACIÓN')
+                    ->description('DETALLES DE LA UBICACIÓN DELEGACIONAL')
+                    ->icon('heroicon-m-map-pin')
+                    ->columnSpanFull()
+                    ->columns(1)
+                    ->schema([
+                        Grid::make(3)
+                            ->schema([
+                                TextEntry::make('direccion_delegacional')
+                                    ->label('Dirección')
+                                    ->columnSpan(3),
+        
+                                TextEntry::make('cp_delegacional')
+                                    ->label('Código postal'),
+        
+                                TextEntry::make('ciudad_delegacional')
+                                    ->label('Municipio'),
+        
+                                TextEntry::make('estado_delegacional')
+                                    ->label('Estado'),
+                            ])
                     ]),
 
                 Section::make()

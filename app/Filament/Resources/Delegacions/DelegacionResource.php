@@ -16,6 +16,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+use App\Filament\Resources\Delegacions\RelationManagers\MaestrosRelationManager; // <-- No olvides el import arriba
+
 class DelegacionResource extends Resource
 {
     protected static ?string $model = Delegacion::class;
@@ -51,7 +53,7 @@ class DelegacionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            MaestrosRelationManager::class, // <-- Agrega esta línea
         ];
     }
 

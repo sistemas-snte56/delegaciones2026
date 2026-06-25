@@ -77,7 +77,7 @@ class Delegacion extends Model
     protected function nombreCompleto(): Attribute
     {
         return Attribute::make(
-            get: fn () => "{$this->nomenclatura->nomenclatura}{$this->num_delegacional} - {$this->sede_delegacional}",
+            get: fn () => "{$this->nomenclatura->nomenclatura}{$this->num_delegacional} {$this->nivel->nombre }  - {$this->sede_delegacional}",
         );
     }
 }

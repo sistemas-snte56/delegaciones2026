@@ -3,11 +3,11 @@
 namespace App\Filament\Resources\Delegacions\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
-// use Filament\Infolists\Components\Section;
-// use Filament\Infolists\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Tabs; // 👈 Importamos Tabs
+use Filament\Schemas\Components\Tabs\Tab; // 👈 Importamos Tab
 
 class DelegacionInfolist
 {
@@ -16,101 +16,104 @@ class DelegacionInfolist
         return $schema
             ->components([
 
-                Section::make('INFORMACIÓN GENERAL')
-                    ->columns(3)
-                    ->description('REGIÓN Y PERIODO DE LA DELEGACIÓ O CENTRO DE TRABAJO')
-                    #->aside() // Esto pone el título a la izquierda y el contenido a la derecha
+                Section::make('INFORMACIÓN INTEGRAL')
+                    ->description('Gestión y consulta de datos de la delegación o centro de trabajo')
                     ->icon('heroicon-o-building-office-2')  
-                    ->columnSpanFull()                  
-                    ->components([
-                        TextEntry::make('region.nombre_completo')
-                            ->label('REGIÓN')
-                            ->weight('bold')
-                            ->badge()
-                            ->color('info')
-                            ->icon('heroicon-m-map-pin')
-                            ,
-
-                        TextEntry::make('fecha_inicio_delegacional')
-                            ->label('INICIO DEL COMITÉ')
-                            ->weight('bold')
-                            ->badge()
-                            ->color('info')
-                            ->icon('heroicon-s-calendar')
-                            ->date()
-                            ->extraAttributes([
-                                    'class' => 'px-3 py-1 gap-2'
-                                ]),
-                            
-                            TextEntry::make('fecha_final_delegacional')
-                            ->label('FINAL DEL COMITÉ')
-                            ->weight('bold')
-                            ->badge()
-                            ->color('info')
-                            ->icon('heroicon-s-calendar')
-                            ->date(),
-                    ]),
-
-                Section::make('DATOS PRINCIPALES')
-                    ->description('DELEGACIÓN O CENTRO DE TRABAJO')
-                    ->icon('heroicon-o-document-text')
                     ->columnSpanFull()
-                    ->columns(1)     
+                    ->columns(1)               
                     ->schema([
-                        Grid::make(3)
-                            ->schema([
-                            
-                                TextEntry::make('tipoDelegacion.tipo')
-                                    ->label('DELEGACIÓN O CENTRO DE TRABAJO')
-                                    ->weight('bold')
-                                    ->columnSpan(3), // 👈 ocupa las 3 columnas
+                        
+                        Tabs::make('Detalles')
+                            ->columnSpanFull()
+                            ->tabs([
+                                
+                                // --- PESTAÑA 1: VIGENCIA Y GENERAL ---
+                                Tab::make('Vigencia y Periodo')
+                                    ->icon('heroicon-m-calendar-days')
+                                    ->columns(3)
+                                    ->schema([
+                                        TextEntry::make('region.nombre_completo')
+                                            ->label('REGIÓN')
+                                            ->weight('extrabold')
+                                            ->badge()
+                                            ->color('info')
+                                            ->icon('heroicon-m-map-pin'),
 
-                                TextEntry::make('clave_delegacion')
-                                    ->label('DELEGACIÓN')
-                                    ->copyable()
-                                    ->icon('heroicon-m-tag'),
+                                        TextEntry::make('fecha_inicio_delegacional')
+                                            ->label('INICIO DEL COMITÉ')
+                                            ->weight('bold')
+                                            ->badge()
+                                            ->color('success')
+                                            ->icon('heroicon-m-calendar-days')
+                                            ->date('d/m/Y'),
+                                            
+                                        TextEntry::make('fecha_final_delegacional')
+                                            ->label('FINAL DEL COMITÉ')
+                                            ->weight('bold')
+                                            ->badge()
+                                            ->color('danger')
+                                            ->icon('heroicon-m-calendar-days')
+                                            ->date('d/m/Y'),
+                                    ]),
 
-                                TextEntry::make('nivel.nombre')
-                                    ->label('Nivel educativo'),
+                                // --- PESTAÑA 2: IDENTIFICACIÓN ---
+                                Tab::make('Datos Principales')
+                                    ->icon('heroicon-m-identification')
+                                    ->columns(3)
+                                    ->schema([
+                                        TextEntry::make('tipoDelegacion.tipo')
+                                            ->label('TIPO DE CENTRO DE TRABAJO')
+                                            ->weight('extrabold')
+                                            ->columnSpanFull()
+                                            ->color('primary'),
 
-                                TextEntry::make('sede_delegacional')
-                                    ->label('Sede'),
-                            ]),
-                    ]),
+                                        TextEntry::make('clave_delegacion')
+                                            ->label('CLAVE DELEGACIONAL')
+                                            ->weight('extrabold')
+                                            ->fontFamily('mono')
+                                            ->copyable()
+                                            ->icon('heroicon-m-tag')
+                                            ->iconColor('warning'),
 
-                Section::make('UBICACIÓN')
-                    ->description('DETALLES DE LA UBICACIÓN DELEGACIONAL')
-                    ->icon('heroicon-m-map-pin')
-                    ->columnSpanFull()
-                    ->columns(1)
-                    ->schema([
-                        Grid::make(3)
-                            ->schema([
-                                TextEntry::make('direccion_delegacional')
-                                    ->label('Dirección')
-                                    ->columnSpan(3),
-        
-                                TextEntry::make('cp_delegacional')
-                                    ->label('Código postal'),
-        
-                                TextEntry::make('ciudad_delegacional')
-                                    ->label('Municipio'),
-        
-                                TextEntry::make('estado_delegacional')
-                                    ->label('Estado'),
-                            ])
-                    ]),
+                                        TextEntry::make('nivel.nombre')
+                                            ->label('NIVEL EDUCATIVO')
+                                            ->weight('bold')
+                                            ->badge()
+                                            ->color('gray'),
 
-                Section::make()
-                    ->columnSpanFull()
-                    ->components([
-                        TextEntry::make('maestros')
-                            ->label('')
-                            ->formatStateUsing(fn ($state) =>
-                                $state ? null : 'No hay maestros asociados a esta delegación.'
-                            )
-                            ->color('danger'),
-                    ]),
+                                        TextEntry::make('sede_delegacional')
+                                            ->label('SEDE O LOCALIDAD')
+                                            ->weight('semibold')
+                                            ->icon('heroicon-m-map'),
+                                    ]),
+
+                                // --- PESTAÑA 3: UBICACIÓN ---
+                                Tab::make('Ubicación Geográfica')
+                                    ->icon('heroicon-m-map-pin')
+                                    ->columns(3)
+                                    ->schema([
+                                        TextEntry::make('direccion_delegacional')
+                                            ->label('DIRECCIÓN COMPLETA')
+                                            ->weight('medium')
+                                            ->columnSpanFull(),
+                
+                                        TextEntry::make('cp_delegacional')
+                                            ->label('CÓDIGO POSTAL')
+                                            ->fontFamily('mono'),
+                
+                                        TextEntry::make('ciudad_delegacional')
+                                            ->label('MUNICIPIO')
+                                            ->weight('semibold'),
+                
+                                        TextEntry::make('estado_delegacional')
+                                            ->label('ESTADO')
+                                            ->weight('semibold'),
+                                    ]),
+
+                            ]), // Fin de Tabs
+
+                    ]), // Fin de Section
+
             ]);
     }
 }

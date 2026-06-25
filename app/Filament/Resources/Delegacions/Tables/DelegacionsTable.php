@@ -17,15 +17,31 @@ class DelegacionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('region.nombre_completo'),
-                TextColumn::make('clave_delegacion')
-                    ->sortable()
-                    ->label('Delegacion')
-                    ->searchable(),
-                TextColumn::make('nivel.nombre')
-                    ->searchable(),
-                TextColumn::make('sede_delegacional')
-                    ->searchable(),
+                TextColumn::make('region.nombre_completo')
+                    ->label('REGION'),
+
+                TextColumn::make('nombre_completo')
+                    ->label('DELEGACION')
+                    ->searchable(['num_delegacional', 'clave_delegacion', 'sede_delegacional'])
+                    ->sortable(),
+
+                TextColumn::make('titular_delegacion') // Nombre ficticio para que no se confunda Filament
+                    ->label('MAESTRO / TITULAR')
+                    ->getStateUsing(function ($record) {
+                        // Buscamos en la base de datos al primer maestro de esta delegación
+                        return $record->maestros()
+                            // filtramos a través de la relación 'secretaria' que debe tener tu modelo Maestro
+                            ->whereHas('secretaria', function ($query) {
+                                $query->whereIn('cartera_secretaria', [ // 👈 Cambia 'cartera' por el nombre de la columna real en tu tabla 'secretarias' (puede ser 'nombre', 'puesto', etc.)
+                                    'SECRETARÍA GENERAL', 
+                                    'REPRESENTANTE SINDICAL DE CENTRO DE TRABAJO'
+                                ]);
+                            })
+                            ->first()?->nombre_completo; // Tu accessor en Maestro.php
+                    })
+                    ->searchable(['nombre','apaterno','amaterno'])
+                    ->placeholder('Sin asignar'),
+
                 TextColumn::make('fecha_inicio_delegacional')
                     ->date()
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -46,12 +62,13 @@ class DelegacionsTable
                         ),
             ])
             // ->recordUrl(null)
+            // ->recordUrl(fn ($record) => \App\Filament\Resources\Delegacions\DelegacionResource::getUrl('view', ['record' => $record]))
             ->recordActions([
-                ViewAction::make(),
+                EditAction::make()->slideOver(),
             ])
                 
             ->actions([
-                EditAction::make(),
+                ViewAction::make(),
             ])
             
             ->toolbarActions([

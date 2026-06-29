@@ -18,6 +18,7 @@ class MaestroForm
                 Section::make('Cargo Sindical')
                     ->description('Delegación y cartera asignada')
                     ->icon('heroicon-o-briefcase')
+                    ->collapsed()                    
                     ->schema([
                         Select::make('delegacion_id')
                             ->label('Delegación')
@@ -48,26 +49,28 @@ class MaestroForm
                             ->required()
                             ->live(),
 
-                        Select::make('user_id')
-                            ->label('Usuario del Sistema')
-                            ->relationship('user', 'name')
-                            ->searchable()
-                            ->nullable()
-                            ->columnSpanFull(),
+                        // Select::make('user_id')
+                        //     ->label('Usuario del Sistema')
+                        //     ->relationship('user', 'name')
+                        //     ->searchable()
+                        //     ->nullable()
+                        //     ->columnSpanFull(),
                     ])->columns(2),
 
                 Section::make('Datos Personales')
                     ->description('Información del maestro/dirigente')
                     ->icon('heroicon-o-user')
+                    ->collapsed()                    
                     ->schema([
                         Select::make('titulo')
                             ->label('Título')
                             ->options([
                                 'PROF.'  => 'PROF.',
-                                'PROFR.' => 'PROFA.',
+                                'PROFA.' => 'PROFA.',
                                 'C.'     => 'C.',
                             ])
-                            ->placeholder('Selecciona...'),
+                            ->placeholder('Selecciona...')
+                            ->required(),
 
                         Select::make('genero')
                             ->label('Género')
@@ -103,12 +106,19 @@ class MaestroForm
                         TextInput::make('email')
                             ->label('Correo Electrónico')
                             ->email()
-                            ->maxLength(150),
+                            ->maxLength(150)
+                            ->required(),
 
                         TextInput::make('telefono')
                             ->label('Teléfono')
                             ->tel()
-                            ->maxLength(20),
+                            // ->maxLength(20)
+                            ->required()
+                            ->validationMessages([
+                                'digits' => 'El teléfono debe contener exactamente 10 dígitos',
+                                'regex' => 'El teléfono no debe contener texto',
+                            ])
+                            ->rule('digits:10'),
 
                         TextInput::make('direccion')
                             ->label('Domicilio')
@@ -117,7 +127,10 @@ class MaestroForm
 
                         TextInput::make('cp')
                             ->label('Código Postal')
-                            ->maxLength(10),
+                            ->rule('digits:5')
+                            ->validationMessages([
+                                'digits' => 'El campo codigo postal requiere solo cinco dígitos.'
+                            ]),
 
                         TextInput::make('ciudad')
                             ->label('Ciudad')

@@ -39,7 +39,7 @@ class DelegacionsTable
                             })
                             ->first()?->nombre_completo; // Tu accessor en Maestro.php
                     })
-                    ->searchable(['nombre','apaterno','amaterno'])
+                    // ->searchable(['nombre','apaterno','amaterno'])
                     ->placeholder('Sin asignar'),
 
                 TextColumn::make('fecha_inicio_delegacional')
@@ -64,7 +64,7 @@ class DelegacionsTable
             // ->recordUrl(null)
             // ->recordUrl(fn ($record) => \App\Filament\Resources\Delegacions\DelegacionResource::getUrl('view', ['record' => $record]))
             ->recordActions([
-                EditAction::make()->slideOver(),
+                EditAction::make(),
             ])
                 
             ->actions([

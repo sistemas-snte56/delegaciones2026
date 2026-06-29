@@ -16,7 +16,7 @@ class DelegacionInfolist
         return $schema
             ->components([
 
-                Section::make('INFORMACIÓN INTEGRAL')
+                Section::make('INFORMACIÓN GENERAL')
                     ->description('Gestión y consulta de datos de la delegación o centro de trabajo')
                     ->icon('heroicon-o-building-office-2')  
                     ->columnSpanFull()

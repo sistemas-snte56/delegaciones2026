@@ -46,6 +46,62 @@ class Maestro extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+
+
+    protected function nombre(): Attribute
+    {
+        return Attribute::make(
+            set : fn (?string $value) => $value
+                ? mb_strtoupper(trim($value),'UTF-8')
+                : null,
+        );
+    }
+
+    protected function apaterno(): Attribute
+    {
+        return Attribute::make(
+            set : fn (?string $value) => $value
+                ? mb_strtoupper(trim($value),'UTF-8')
+                : null,
+        );
+    }
+
+    protected function amaterno(): Attribute
+    {
+        return Attribute::make(
+            set : fn (?string $value) => $value
+                ? mb_strtoupper(trim($value),'UTF-8')
+                : null,
+        );
+    }
+
+    protected function direccion(): Attribute
+    {
+        return Attribute::make(
+            set : fn (?string $value) => $value
+                ? mb_strtoupper(trim($value),'UTF-8')
+                : null,
+        );
+    }
+    
+    protected function ciudad(): Attribute
+    {
+        return Attribute::make(
+            set : fn (?string $value) => $value
+                ? mb_strtoupper(trim($value),'UTF-8')
+                : null,
+        );
+    }
+    
+    protected function estado(): Attribute
+    {
+        return Attribute::make(
+            set : fn (?string $value) => $value
+                ? mb_strtoupper(trim($value),'UTF-8')
+                : null,
+        );
+    }
+
     // Accessors
     protected function nombreCompleto(): Attribute
     {

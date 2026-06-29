@@ -80,4 +80,13 @@ class Delegacion extends Model
             get: fn () => "{$this->nomenclatura->nomenclatura}{$this->num_delegacional} {$this->nivel->nombre }  - {$this->sede_delegacional}",
         );
     }
+
+    public function titular()
+    {
+        return $this->hasOne(Maestro::class)
+            ->whereHas('secretaria', function($query){
+                $query -> where('cartera_secretaria','LIKE','%SECRETARIA GENERAL%')
+                       -> orWhere('cartera_secretaria','LIKE','%REPRESENTANTE%');
+            });
+    }
 }

@@ -16,6 +16,7 @@ class DelegacionsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with(['titular']))
             ->columns([
                 TextColumn::make('region.nombre_completo')
                     ->label('REGION'),
@@ -25,21 +26,9 @@ class DelegacionsTable
                     ->searchable(['num_delegacional', 'clave_delegacion', 'sede_delegacional'])
                     ->sortable(),
 
-                TextColumn::make('titular_delegacion') // Nombre ficticio para que no se confunda Filament
-                    ->label('MAESTRO / TITULAR')
-                    ->getStateUsing(function ($record) {
-                        // Buscamos en la base de datos al primer maestro de esta delegación
-                        return $record->maestros()
-                            // filtramos a través de la relación 'secretaria' que debe tener tu modelo Maestro
-                            ->whereHas('secretaria', function ($query) {
-                                $query->whereIn('cartera_secretaria', [ // 👈 Cambia 'cartera' por el nombre de la columna real en tu tabla 'secretarias' (puede ser 'nombre', 'puesto', etc.)
-                                    'SECRETARÍA GENERAL', 
-                                    'REPRESENTANTE SINDICAL DE CENTRO DE TRABAJO'
-                                ]);
-                            })
-                            ->first()?->nombre_completo; // Tu accessor en Maestro.php
-                    })
-                    // ->searchable(['nombre','apaterno','amaterno'])
+                TextColumn::make('titular.nombre_completo')
+                    ->label('titular')
+                    ->searchable(['nombre','apaterno','amaterno'])
                     ->placeholder('Sin asignar'),
 
                 TextColumn::make('fecha_inicio_delegacional')

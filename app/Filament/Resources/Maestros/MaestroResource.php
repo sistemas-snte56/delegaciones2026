@@ -55,4 +55,19 @@ class MaestroResource extends Resource
             'edit' => EditMaestro::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Docentes';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-academic-cap';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }    
 }

@@ -53,4 +53,19 @@ class RegionResource extends Resource
             // 'edit' => EditRegion::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Estructura Sindical';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-globe-alt';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 2;
+    }    
 }

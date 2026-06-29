@@ -47,4 +47,19 @@ class TipoDelegacionResource extends Resource
             // 'edit' => EditTipoDelegacion::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Catálogos';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-adjustments-horizontal';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }    
 }

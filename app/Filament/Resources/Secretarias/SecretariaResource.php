@@ -47,4 +47,20 @@ class SecretariaResource extends Resource
             // 'edit' => EditSecretaria::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Administración';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-user-group';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }
+
 }

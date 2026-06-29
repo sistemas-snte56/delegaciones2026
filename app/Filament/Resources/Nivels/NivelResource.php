@@ -51,4 +51,19 @@ class NivelResource extends Resource
             // 'edit' => EditNivel::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Catálogos';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-squares-2x2';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 2;
+    }    
 }

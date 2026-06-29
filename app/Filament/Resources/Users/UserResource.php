@@ -48,8 +48,18 @@ class UserResource extends Resource
         ];
     }
 
-    // public static function canViewAny(): bool
-    // {
-    //     return auth()->user()?->hasRole('super_admin') ?? false;
-    // }
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Administración';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-users';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 2;
+    }
 }

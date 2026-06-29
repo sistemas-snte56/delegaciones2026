@@ -66,4 +66,19 @@ class DelegacionResource extends Resource
             'edit' => EditDelegacion::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Estructura Sindical';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-building-office-2';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 1;
+    }    
 }

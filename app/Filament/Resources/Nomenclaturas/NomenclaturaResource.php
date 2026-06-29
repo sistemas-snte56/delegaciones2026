@@ -46,5 +46,21 @@ class NomenclaturaResource extends Resource
             // 'create' => CreateNomenclatura::route('/create'),
             // 'edit' => EditNomenclatura::route('/{record}/edit'),
         ];
+        
     }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Catálogos';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-tag';
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return 3;
+    }    
 }
